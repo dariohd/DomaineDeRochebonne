@@ -8,6 +8,7 @@ import { Link } from "@/i18n/navigation";
 import type { LocalizedAccommodation } from "@/lib/data/content";
 import { AnimatedSection, StaggerContainer, staggerItem } from "@/components/ui/animated-section";
 import { Button } from "@/components/ui/button";
+import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 
 type Props = {
   items: LocalizedAccommodation[];
@@ -51,7 +52,7 @@ export function AccommodationsGrid({ items, showAll = false, showImages = true }
                 href={`/hebergements/${acc.slug}`}
                 className="group block overflow-hidden rounded-2xl bg-white shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-forest/10"
               >
-                {showImages && (
+                {showImages ? (
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <Image
                       src={acc.image}
@@ -72,13 +73,23 @@ export function AccommodationsGrid({ items, showAll = false, showImages = true }
                       </span>
                     )}
                   </div>
+                ) : (
+                  <div className="relative">
+                    <ImagePlaceholder label={tc("photoPlaceholder")} />
+                    {acc.featured && (
+                      <span className="absolute left-4 top-4 z-10 rounded-full bg-gold px-3 py-1 text-xs font-medium text-forest">
+                        {tc("featured")}
+                      </span>
+                    )}
+                    {acc.privatePool && (
+                      <span className="absolute right-4 top-4 z-10 flex items-center gap-1 rounded-full bg-cream/90 px-3 py-1 text-xs font-medium text-forest backdrop-blur-sm">
+                        <Droplets className="h-3 w-3" />
+                        {tc("privatePool")}
+                      </span>
+                    )}
+                  </div>
                 )}
                 <div className="p-6">
-                  {!showImages && acc.featured && (
-                    <span className="mb-3 inline-block rounded-full bg-gold/15 px-3 py-1 text-xs font-medium text-forest">
-                      {tc("featured")}
-                    </span>
-                  )}
                   <h3 className="font-serif text-xl text-forest">{acc.shortName}</h3>
                   <div className="mt-3 flex items-center gap-4 text-sm text-stone">
                     <span className="flex items-center gap-1.5">
@@ -89,12 +100,6 @@ export function AccommodationsGrid({ items, showAll = false, showImages = true }
                       <Bed className="h-4 w-4" />
                       {acc.bedrooms} {tc("ch")}
                     </span>
-                    {!showImages && acc.privatePool && (
-                      <span className="flex items-center gap-1.5">
-                        <Droplets className="h-4 w-4" />
-                        {tc("privatePool")}
-                      </span>
-                    )}
                   </div>
                   <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-stone/80">
                     {acc.description}

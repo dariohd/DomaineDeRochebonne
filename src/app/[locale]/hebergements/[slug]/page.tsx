@@ -8,6 +8,7 @@ import {
 } from "@/lib/data/content";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { Button } from "@/components/ui/button";
+import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -97,6 +98,18 @@ export default async function AccommodationPage({ params }: Props) {
                     </li>
                   ))}
                 </ul>
+
+                {acc.images.length > 1 && (
+                  <div className="mt-10 grid gap-4 sm:grid-cols-2">
+                    {acc.images.slice(1).map((img) => (
+                      <ImagePlaceholder
+                        key={img}
+                        label={t("photoPlaceholder")}
+                        rounded="xl"
+                      />
+                    ))}
+                  </div>
+                )}
               </AnimatedSection>
             </div>
 

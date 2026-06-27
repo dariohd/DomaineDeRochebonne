@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { FeaturesGrid } from "@/components/home/highlights";
 import { CtaSection } from "@/components/home/about-preview";
 import { getLocalizedHighlights } from "@/lib/data/content";
+import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 
 export async function generateMetadata({
   params,
@@ -47,13 +48,18 @@ export default async function DecouvrirPage() {
 
       <section className="section-padding bg-cream">
         <div className="container-wide">
-          <AnimatedSection className="mx-auto max-w-3xl">
-            <h2 className="font-serif text-3xl text-forest md:text-4xl">{t("section1Title")}</h2>
-            <div className="mt-6 space-y-4 text-stone leading-relaxed">
-              <p>{t("section1p1")}</p>
-              <p>{t("section1p2")}</p>
-            </div>
-          </AnimatedSection>
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <AnimatedSection>
+              <h2 className="font-serif text-3xl text-forest md:text-4xl">{t("section1Title")}</h2>
+              <div className="mt-6 space-y-4 text-stone leading-relaxed">
+                <p>{t("section1p1")}</p>
+                <p>{t("section1p2")}</p>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection delay={0.2} direction="right">
+              <ImagePlaceholder label={tc("photoPlaceholder")} rounded="2xl" />
+            </AnimatedSection>
+          </div>
         </div>
       </section>
 
@@ -61,15 +67,20 @@ export default async function DecouvrirPage() {
 
       <section className="section-padding bg-cream-dark">
         <div className="container-wide">
-          <AnimatedSection className="mx-auto max-w-3xl">
-            <h2 className="font-serif text-3xl text-forest md:text-4xl">{t("facilitiesTitle")}</h2>
-            <div className="mt-6 space-y-4 text-stone leading-relaxed">
-              <p>{t("facilitiesp1")}</p>
-              <p>{t("facilitiesp2")}</p>
-              <p>{t("facilitiesp3")}</p>
-            </div>
-            <Button href="/region" className="mt-8">{tc("exploreRegion")}</Button>
-          </AnimatedSection>
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <AnimatedSection direction="left">
+              <ImagePlaceholder label={tc("photoPlaceholder")} rounded="2xl" />
+            </AnimatedSection>
+            <AnimatedSection direction="right" delay={0.2}>
+              <h2 className="font-serif text-3xl text-forest md:text-4xl">{t("facilitiesTitle")}</h2>
+              <div className="mt-6 space-y-4 text-stone leading-relaxed">
+                <p>{t("facilitiesp1")}</p>
+                <p>{t("facilitiesp2")}</p>
+                <p>{t("facilitiesp3")}</p>
+              </div>
+              <Button href="/region" className="mt-8">{tc("exploreRegion")}</Button>
+            </AnimatedSection>
+          </div>
         </div>
       </section>
 

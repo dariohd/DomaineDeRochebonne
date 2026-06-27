@@ -8,6 +8,7 @@ import { Link } from "@/i18n/navigation";
 import type { LocalizedRegionSpot } from "@/lib/data/content";
 import { AnimatedSection, StaggerContainer, staggerItem } from "@/components/ui/animated-section";
 import { Button } from "@/components/ui/button";
+import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 
 export function RegionPreview({ spots }: { spots: LocalizedRegionSpot[] }) {
   const t = useTranslations("region");
@@ -60,6 +61,7 @@ export function RegionPreview({ spots }: { spots: LocalizedRegionSpot[] }) {
 
 export function RegionGrid({ spots, showImages = false }: { spots: LocalizedRegionSpot[]; showImages?: boolean }) {
   const t = useTranslations("region");
+  const tc = useTranslations("common");
 
   return (
     <section className="section-padding bg-cream">
@@ -77,7 +79,7 @@ export function RegionGrid({ spots, showImages = false }: { spots: LocalizedRegi
               variants={staggerItem}
               className="overflow-hidden rounded-2xl bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl"
             >
-              {showImages && (
+              {showImages ? (
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <Image
                     src={spot.image}
@@ -87,6 +89,11 @@ export function RegionGrid({ spots, showImages = false }: { spots: LocalizedRegi
                     sizes="33vw"
                   />
                 </div>
+              ) : (
+                <ImagePlaceholder
+                  label={tc("photoPlaceholder")}
+                  aspectClassName="aspect-[16/10]"
+                />
               )}
               <div className="p-6">
                 <div className="flex items-center gap-2 text-sm text-gold">
