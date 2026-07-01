@@ -29,6 +29,15 @@ export default function ReservationForm() {
     const guests = data.get("guests") as string;
     const message = data.get("message") as string;
 
+    if (arrival && departure && departure <= arrival) {
+      alert("La date de départ doit être après l'arrivée.");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert("Adresse email invalide.");
+      return;
+    }
+
     const body = encodeURIComponent(
       `Réservation - ${name}\nNom: ${name}\nEmail: ${email}\nHébergement: ${accommodation}\nArrivée: ${arrival}\nDépart: ${departure}\nPersonnes: ${guests}\n\n${message}`,
     );

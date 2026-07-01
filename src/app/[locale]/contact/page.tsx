@@ -22,6 +22,10 @@ export default function ContactPage() {
     const email = data.get("email") as string;
     const message = data.get("message") as string;
     const subjectType = data.get("subject-type") as string;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert("Adresse email invalide.");
+      return;
+    }
     const body = encodeURIComponent(
       `Contact - ${name} (${subjectType})\nNom: ${name}\nEmail: ${email}\n\n${message}`,
     );
